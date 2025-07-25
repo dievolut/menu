@@ -165,39 +165,91 @@
     </div>
 
     <div class="search">
-      <input type="text" placeholder="🔍 Buscar platillos...">
+      <input type="text" id="search" placeholder="🔍 Buscar platillos...">
     </div>
 
     <button class="cart-button">
       🛒 Ver Carrito
-      <span>2</span>
+      <span id="cart-count">0</span>
     </button>
 
     <div class="tabs">
-      <button>Tacos</button>
-      <button>Quesadillas</button>
-      <button>Burritos</button>
-      <button>Appetizers</button>
+      <button data-category="Tacos">Tacos</button>
+      <button data-category="Quesadillas">Quesadillas</button>
+      <button data-category="Burritos">Burritos</button>
+      <button data-category="Appetizers">Appetizers</button>
     </div>
 
     <div class="section-title">
-      <h2>Tacos</h2>
-      <p>3 platillos disponibles</p>
+      <h2 id="category-title">Tacos</h2>
+      <p><span id="items-count">0</span> platillos disponibles</p>
     </div>
 
-    <div class="product-card">
-      <img src="https://cdn.pixabay.com/photo/2021/10/01/10/03/tacos-6671135_1280.jpg" alt="Taco">
-      <div class="product-details">
-        <h3>Tacos Regulares</h3>
-        <p>Carne, cebolla y cilantro</p>
-      </div>
-      <div class="price-add">
-        <div class="price">$3.75</div>
-        <button class="add-btn">+ Agregar</button>
-      </div>
-    </div>
+    <div id="products"></div>
 
-  </div>
+</div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const products = [
+        { id: 1, category: 'Tacos', name: 'Tacos Regulares', desc: 'Carne, cebolla y cilantro', price: 3.75, image: 'https://cdn.pixabay.com/photo/2021/10/01/10/03/tacos-6671135_1280.jpg' },
+        { id: 2, category: 'Tacos', name: 'Tacos al Pastor', desc: 'Pastor con pi\u00f1a', price: 4.25, image: 'https://cdn.pixabay.com/photo/2017/03/27/13/06/taco-2178867_1280.jpg' },
+        { id: 3, category: 'Quesadillas', name: 'Quesadilla de Pollo', desc: 'Pollo y queso', price: 5.50, image: 'https://cdn.pixabay.com/photo/2018/04/29/01/57/quesadilla-3351707_1280.jpg' },
+        { id: 4, category: 'Burritos', name: 'Burrito de Carne', desc: 'Carne, arroz y frijol', price: 6.00, image: 'https://cdn.pixabay.com/photo/2014/10/23/18/05/burrito-500373_1280.jpg' },
+        { id: 5, category: 'Appetizers', name: 'Nachos', desc: 'Totopos con queso', price: 4.00, image: 'https://cdn.pixabay.com/photo/2016/08/14/20/49/nachos-1596543_1280.jpg' }
+      ];
+
+      let cartCount = 0;
+      let currentCategory = 'Tacos';
+
+      const productsEl = document.getElementById('products');
+      const categoryTitle = document.getElementById('category-title');
+      const itemsCount = document.getElementById('items-count');
+      const cartSpan = document.getElementById('cart-count');
+      const searchInput = document.getElementById('search');
+      const tabs = document.querySelectorAll('.tabs button');
+
+      function render() {
+        const term = searchInput.value.toLowerCase();
+        const filtered = products.filter(p => p.category === currentCategory && p.name.toLowerCase().includes(term));
+        itemsCount.textContent = filtered.length;
+        categoryTitle.textContent = currentCategory;
+        productsEl.innerHTML = '';
+        filtered.forEach(p => {
+          const card = document.createElement('div');
+          card.className = 'product-card';
+          card.innerHTML = `
+            <img src="${p.image}" alt="${p.name}">
+            <div class="product-details">
+              <h3>${p.name}</h3>
+              <p>${p.desc}</p>
+            </div>
+            <div class="price-add">
+              <div class="price">$${p.price.toFixed(2)}</div>
+              <button class="add-btn" data-id="${p.id}">+ Agregar</button>
+            </div>
+          `;
+          productsEl.appendChild(card);
+        });
+      }
+
+      tabs.forEach(btn => btn.addEventListener('click', () => {
+        currentCategory = btn.dataset.category;
+        render();
+      }));
+
+      productsEl.addEventListener('click', e => {
+        if (e.target.classList.contains('add-btn')) {
+          cartCount++;
+          cartSpan.textContent = cartCount;
+        }
+      });
+
+      searchInput.addEventListener('input', render);
+
+      render();
+    });
+  </script>
 
 </body>
 </html>
