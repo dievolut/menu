@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Oaxaqueñaca</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f0f2f5;
+      padding: 16px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      text-align: center;
+      padding: 16px;
+    }
+
+    .header h1 {
+      color: #d33a2d;
+    }
+
+    .header p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .search {
+      padding: 0 16px 16px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .cart-button {
+      background-color: #d33a2d;
+      color: white;
+      padding: 10px;
+      margin: 0 16px 16px;
+      border: none;
+      width: 100%;
+      border-radius: 8px;
+      position: relative;
+      font-weight: bold;
+    }
+
+    .cart-button span {
+      position: absolute;
+      right: 16px;
+      top: 8px;
+      background-color: yellow;
+      color: black;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    .tabs {
+      display: flex;
+      padding: 0 16px 16px;
+      gap: 8px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      background-color: #fff3e0;
+      font-weight: bold;
+      color: #d33a2d;
+      cursor: pointer;
+    }
+
+    .section-title {
+      padding: 0 16px;
+      margin-top: 16px;
+    }
+
+    .section-title h2 {
+      color: #d33a2d;
+    }
+
+    .section-title p {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .product-card {
+      margin: 16px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #eee;
+    }
+
+    .product-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .product-details {
+      padding: 12px;
+    }
+
+    .product-details h3 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .product-details p {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .price-add {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+    }
+
+    .price {
+      color: #d33a2d;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .add-btn {
+      background-color: #ffab40;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>La Oaxaqueñaca</h1>
+      <p>Auténtica comida mexicana</p>
+    </div>
+
+    <div class="search">
+      <input type="text" placeholder="🔍 Buscar platillos...">
+    </div>
+
+    <button class="cart-button">
+      🛒 Ver Carrito
+      <span>2</span>
+    </button>
+
+    <div class="tabs">
+      <button>Tacos</button>
+      <button>Quesadillas</button>
+      <button>Burritos</button>
+      <button>Appetizers</button>
+    </div>
+
+    <div class="section-title">
+      <h2>Tacos</h2>
+      <p>3 platillos disponibles</p>
+    </div>
+
+    <div class="product-card">
+      <img src="https://cdn.pixabay.com/photo/2021/10/01/10/03/tacos-6671135_1280.jpg" alt="Taco">
+      <div class="product-details">
+        <h3>Tacos Regulares</h3>
+        <p>Carne, cebolla y cilantro</p>
+      </div>
+      <div class="price-add">
+        <div class="price">$3.75</div>
+        <button class="add-btn">+ Agregar</button>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
