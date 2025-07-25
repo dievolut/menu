@@ -4,7 +4,7 @@ const products = [
     name: 'Tacos Regulares',
     description: 'Carne, cebolla y cilantro',
     price: 3.75,
-    image: 'https://cdn.pixabay.com/photo/2021/10/01/10/03/tacos-6671135_1280.jpg',
+    image: 'https://images.pexels.com/photos/8474723/pexels-photo-8474723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     category: 'Tacos'
   },
   {
@@ -12,7 +12,7 @@ const products = [
     name: 'Tacos de Suadero',
     description: 'Suadero, cebolla y cilantro',
     price: 4.00,
-    image: 'https://cdn.pixabay.com/photo/2022/03/02/10/32/tacos-7042813_1280.jpg',
+    image: 'https://images.pexels.com/photos/5639433/pexels-photo-5639433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     category: 'Tacos'
   },
   {
@@ -20,7 +20,7 @@ const products = [
     name: 'Tacos de Pastor',
     description: 'Carne al pastor, piña, cebolla y cilantro',
     price: 4.25,
-    image: 'https://cdn.pixabay.com/photo/2020/02/01/05/59/tacos-al-pastor-4809839_1280.jpg',
+    image: 'https://images.pexels.com/photos/2092916/pexels-photo-2092916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     category: 'Tacos'
   },
   {
@@ -84,10 +84,10 @@ function renderProducts(productsToRender) {
         <div class="product-details">
           <h3>${product.name}</h3>
           <p>${product.description}</p>
+          <div class="price">$${product.price.toFixed(2)}</div>
         </div>
         <div class="price-add">
-          <div class="price">$${product.price.toFixed(2)}</div>
-          <button class="add-btn" data-id="${product.id}">+ Agregar</button>
+          <button class="add-btn" data-id="${product.id}">+</button>
         </div>
       </div>
     `;
@@ -151,6 +151,25 @@ window.addEventListener('click', (e) => {
   }
 });
 
+const cartItemsContainer = document.getElementById('cart-items');
+
+cartItemsContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('remove-from-cart')) {
+    const productId = e.target.dataset.id;
+    removeFromCart(productId);
+  }
+});
+
+function removeFromCart(productId) {
+  if (cart[productId] > 1) {
+    cart[productId]--;
+  } else {
+    delete cart[productId];
+  }
+  updateCartCount();
+  renderCart();
+}
+
 function renderCart() {
   const cartItemsContainer = document.getElementById('cart-items');
   const cartTotalContainer = document.getElementById('cart-total');
@@ -163,10 +182,13 @@ function renderCart() {
     total += product.price * quantity;
 
     const cartItem = `
-      <div>
-        <span>${product.name}</span>
-        <span>x${quantity}</span>
-        <span>$${(product.price * quantity).toFixed(2)}</span>
+      <div class="cart-item">
+        <div class="cart-item-details">
+          <span>${product.name}</span>
+          <span>x${quantity}</span>
+          <span>$${(product.price * quantity).toFixed(2)}</span>
+        </div>
+        <button class="remove-from-cart" data-id="${product.id}">🗑️</button>
       </div>
     `;
     cartItemsContainer.innerHTML += cartItem;
