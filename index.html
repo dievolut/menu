@@ -110,6 +110,45 @@
       cursor: pointer;
     }
 
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .remove-from-cart {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #cart-total {
+      text-align: right;
+      margin-top: 16px;
+      font-size: 18px;
+    }
+
+    .checkout-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 16px;
+      cursor: pointer;
+    }
+
     .cart-button span {
       position: absolute;
       right: 16px;
@@ -125,6 +164,13 @@
       display: flex;
       padding: 0 16px 16px;
       gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
 
     .tabs button {
@@ -158,11 +204,15 @@
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid #eee;
+      display: flex;
+      min-height: 120px;
     }
 
     .product-card img {
-      width: 100%;
-      display: block;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      flex-shrink: 0;
     }
 
     .product-details {
@@ -181,9 +231,10 @@
 
     .price-add {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       padding: 12px;
+      margin-left: auto;
     }
 
     .price {
@@ -240,6 +291,7 @@
       <h2>Carrito de Compras</h2>
       <div id="cart-items"></div>
       <div id="cart-total"></div>
+      <button class="checkout-button">Pagar</button>
     </div>
   </div>
 
