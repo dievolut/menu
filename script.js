@@ -209,7 +209,9 @@ tabs.addEventListener('click', (e) => {
       renderProducts(filteredProducts);
     }
   }
-  function generarMensajeWhatsApp() {
+});
+
+function generarMensajeWhatsApp() {
   let mensaje = 'Hola, quiero hacer el siguiente pedido:%0A%0A';
   let total = 0;
 
@@ -227,6 +229,7 @@ tabs.addEventListener('click', (e) => {
   const url = `https://wa.me/${telefono}?text=${mensaje}`;
   window.open(url, '_blank');
 }
+
 const checkoutButton = document.querySelector('.checkout-button');
 
 checkoutButton.addEventListener('click', () => {
@@ -235,6 +238,4 @@ checkoutButton.addEventListener('click', () => {
     return;
   }
   generarMensajeWhatsApp();
-});
-
 });
