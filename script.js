@@ -209,4 +209,32 @@ tabs.addEventListener('click', (e) => {
       renderProducts(filteredProducts);
     }
   }
+  function generarMensajeWhatsApp() {
+  let mensaje = 'Hola, quiero hacer el siguiente pedido:%0A%0A';
+  let total = 0;
+
+  for (const productId in cart) {
+    const product = products.find(p => p.id == productId);
+    const quantity = cart[productId];
+    const subtotal = (product.price * quantity).toFixed(2);
+    mensaje += `- ${product.name} x${quantity} ($${subtotal})%0A`;
+    total += parseFloat(subtotal);
+  }
+
+  mensaje += `%0ATotal: $${total.toFixed(2)}`;
+
+  const telefono = '5491162380446'; // ← Reemplazalo con el número de WhatsApp del restaurante
+  const url = `https://wa.me/${telefono}?text=${mensaje}`;
+  window.open(url, '_blank');
+}
+const checkoutButton = document.querySelector('.checkout-button');
+
+checkoutButton.addEventListener('click', () => {
+  if (Object.keys(cart).length === 0) {
+    alert("Tu carrito está vacío 😢");
+    return;
+  }
+  generarMensajeWhatsApp();
+});
+
 });
